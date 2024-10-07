@@ -1,0 +1,30 @@
+<H4>Esta es la Tabla</H4>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Edad</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (dato of datos; track $index) {
+    <tr>
+      <td>{{ dato.numeroDocumento }}</td>
+
+      <td>
+        {{ dato.nombre }}
+      </td>
+      <td>
+        {{ dato.edad }}
+      </td>
+
+      <td>
+        <button type="button" (click)="enviarInformacion(dato)">Info</button>
+      </td>
+    </tr>
+
+    }
+  </tbody>
+</table>
