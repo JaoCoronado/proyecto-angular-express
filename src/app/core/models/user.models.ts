@@ -11,6 +11,7 @@ export class UserModel {
 
 export class UserResModel {
   constructor(
+    public readonly _id:string,
     public documentNumber: string,
     public name: string,
     public createdAt: Date,
