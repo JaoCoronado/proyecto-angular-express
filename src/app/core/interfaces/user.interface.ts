@@ -1,13 +1,13 @@
-import { UserModel, UserResModel } from "../models/user.models";
+import { UserModel, UserResModel } from '../models/user.models';
 
-export interface IUser{
-   documentNumber: string;
-   name: string;
-   createdAt: Date;
-   role?: string;
+export interface IUser {
+  documentNumber: string;
+  name: string;
+  email: string;
+  role?: string;
 }
 
-export interface IRespUser{
+export interface IRespUser {
   ok: boolean;
-  users: UserResModel[]
+  users: UserResModel[];
 }

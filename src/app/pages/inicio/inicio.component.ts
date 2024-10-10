@@ -11,7 +11,7 @@ import { UserService } from '../../services/user/user.service';
 import { StoreService } from '../../services/store/store.service';
 import { IRespUser, IUser } from '../../core/interfaces/user.interface';
 import { Subscription, map } from 'rxjs';
-import { UserResModel } from '../../core/models/user.models';
+import { UserModel, UserResModel } from '../../core/models/user.models';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
@@ -22,6 +22,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inicio',
@@ -38,10 +39,8 @@ import Swal from 'sweetalert2';
   ],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InicioComponent implements OnInit, AfterViewInit, OnDestroy {
-
   @ViewChild(MatSort) sort: MatSort;
 
   displayedColumns: string[] = [
@@ -56,11 +55,11 @@ export class InicioComponent implements OnInit, AfterViewInit, OnDestroy {
 
   users: UserResModel[] = [];
 
-  userSubscription: Subscription
+  userSubscription: Subscription;
 
   private _liveAnnouncer = inject(LiveAnnouncer);
-  private userService = inject(UserService)
-
+  private userService = inject(UserService);
+  private router = inject(Router)
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
@@ -71,7 +70,7 @@ export class InicioComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.userSubscription?.unsubscribe()
+    this.userSubscription?.unsubscribe();
   }
 
   announceSortChange(sortState: Sort) {
@@ -83,19 +82,24 @@ export class InicioComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   loadUser() {
-   this.userSubscription = this.userService.getUsers().subscribe((data: IRespUser) => {
-      this.users = data.users;
-      this.dataSource = new MatTableDataSource(this.users);
-    });
+    this.userSubscription = this.userService
+      .getUsers()
+      .subscribe((data: IRespUser) => {
+        this.users = data.users;
+        this.dataSource = new MatTableDataSource(this.users);
+      });
   }
 
-  infoModal(element: UserResModel) {
-    const createdAtFormatted = new Date(element.createdAt).toLocaleString('es-ES', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
+  infoUser(element: UserResModel) {
+    const createdAtFormatted = new Date(element.createdAt).toLocaleString(
+      'es-ES',
+      {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      }
+    );
     Swal.fire({
       title: 'Información del Usuario',
       html: `
@@ -131,21 +135,20 @@ export class InicioComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
   }
-  editModal(element: UserResModel) {
-    const createdAtFormatted = new Date(element.createdAt).toLocaleString('es-ES', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
+  editUser(element: UserResModel) {
+    const createdAtFormatted = new Date(element.createdAt).toLocaleString(
+      'es-ES',
+      {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      }
+    );
     Swal.fire({
       title: 'Editar Información del Usuario',
       html: `
-        <form id="editUserForm" >
-          <div class="form-group mb-3">
-            <label for="userId" class="badge bg-primary">ID:</label>
-            <input type="text" id="userId" class="form-control form-control-sm" value="${element._id}" readonly />
-          </div>
+        <form>
           <div class="form-group mb-3">
             <label for="userName" class="badge bg-primary">Name:</label>
             <input type="text" id="userName" class="form-control form-control-sm" value="${element.name}" />
@@ -170,27 +173,44 @@ export class InicioComponent implements OnInit, AfterViewInit, OnDestroy {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Guardar Cambios',
       preConfirm: () => {
-        const userId = (document.getElementById('userId') as HTMLInputElement).value;
-        const userName = (document.getElementById('userName') as HTMLInputElement).value;
-        const documentNumber = (document.getElementById('documentNumber') as HTMLInputElement).value;
-        const role = (document.getElementById('role') as HTMLInputElement).value;
+        const userId = element._id;
+        const userName = (
+          document.getElementById('userName') as HTMLInputElement
+        ).value;
+        const documentNumber = (
+          document.getElementById('documentNumber') as HTMLInputElement
+        ).value;
+        const role = (document.getElementById('role') as HTMLInputElement)
+          .value;
 
         return {
           _id: userId,
           name: userName,
           documentNumber: documentNumber,
-          role: role
+          role: role,
         };
-      }
+      },
     }).then((result) => {
       if (result.isConfirmed) {
+        const usuarioEditado: UserModel = {
+          _id: result.value._id,
+          documentNumber: result.value.documentNumber,
+          name: result.value.name,
+          createdAt: result.value.createdAt,
+          role: result.value.role,
+        };
 
-        console.log("Datos actualizados:", result.value);
+        console.log('Datos actualizados:', result.value);
+        this.userService.userUpdate(usuarioEditado).subscribe((resp: any) => {
+          this.loadUser();
+          Swal.fire('Usuario Editado!', `${resp.msg}`, 'success');
+        });;
       }
     });
   }
 
 
-
-
+  addUser(){
+this.router.navigateByUrl('crear-usuario')
+  }
 }

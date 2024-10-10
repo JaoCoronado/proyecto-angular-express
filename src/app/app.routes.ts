@@ -1,9 +1,11 @@
 import { Routes } from '@angular/router';
-import { PersonaComponent } from './pages/persona/persona.component';
+
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { ArticuloComponent } from './pages/articulo/articulo.component';
 import { ContactoComponent } from './pages/contacto/contacto.component';
 import { GaleriaComponent } from './pages/galeria/galeria.component';
+import { PersonaComponent } from './pages/persona/persona.component';
+import { CreateUserComponent } from './pages/users/create-user/create-user.component';
 
 export const routes: Routes = [
   {
@@ -15,6 +17,11 @@ export const routes: Routes = [
     path: 'persona',
     title: 'App de Personas',
     component: PersonaComponent,
+  },
+  {
+    path: 'crear-usuario',
+    title: 'Crear un Usuario',
+    component: CreateUserComponent
   },
   {
     path: 'galeria',

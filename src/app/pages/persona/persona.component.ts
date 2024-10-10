@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IPersona } from '../../core/interfaces/persona.interface';
 import { TPersona } from '../../core/types/persona.type';
+import { IPersona } from '../../core/interfaces/persona.interface';
+
 
 @Component({
   selector: 'app-persona',
