@@ -6,6 +6,7 @@ import { ContactoComponent } from './pages/contacto/contacto.component';
 import { GaleriaComponent } from './pages/galeria/galeria.component';
 import { PersonaComponent } from './pages/persona/persona.component';
 import { CreateUserComponent } from './pages/users/create-user/create-user.component';
+import { ViewUsersComponent } from './pages/users/view-users/view-users.component';
 
 export const routes: Routes = [
   {
@@ -17,6 +18,11 @@ export const routes: Routes = [
     path: 'persona',
     title: 'App de Personas',
     component: PersonaComponent,
+  },
+  {
+    path: 'usuarios',
+    title: 'Usuarios',
+    component: ViewUsersComponent
   },
   {
     path: 'crear-usuario',
