@@ -8,6 +8,7 @@ import { PersonaComponent } from './pages/persona/persona.component';
 import { CreateUserComponent } from './pages/users/create-user/create-user.component';
 import { ViewUsersComponent } from './pages/users/view-users/view-users.component';
 import { StoresComponent } from './pages/stores/stores.component';
+import { CreateStoreComponent } from './pages/stores/create-store/create-store.component';
 
 export const routes: Routes = [
   {
