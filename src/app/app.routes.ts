@@ -6,6 +6,9 @@ import { ContactoComponent } from './pages/contacto/contacto.component';
 import { GaleriaComponent } from './pages/galeria/galeria.component';
 import { PersonaComponent } from './pages/persona/persona.component';
 import { CreateUserComponent } from './pages/users/create-user/create-user.component';
+import { CreateStoreComponent } from './pages/stores/create-store/create-store.component';
+import { StoresComponent } from './pages/stores/stores.component';
+import { ViewUsersComponent } from './pages/users/view-users/view-users.component';
 
 export const routes: Routes = [
   {
@@ -24,6 +27,16 @@ export const routes: Routes = [
     component: CreateUserComponent
   },
   {
+    path: 'usuarios',
+    title: 'usuarios',
+    component: ViewUsersComponent
+  },
+  {
+    path: 'crear-tienda',
+    title: 'Crear una Tienda',
+    component: CreateStoreComponent
+  },
+  {
     path: 'galeria',
     title: 'Galeria',
     component: GaleriaComponent,
@@ -37,5 +50,10 @@ export const routes: Routes = [
     path: 'contacto',
     title: 'Contacto',
     component: ContactoComponent,
+  },
+  {
+    path: 'stores',
+    title: 'Stores',
+    component: StoresComponent,
   },
 ];
