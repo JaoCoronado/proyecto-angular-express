@@ -1,35 +1,44 @@
-import { Component, inject, ViewChild } from '@angular/core';
-import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
-import { UserModel, UserResModel } from '../../../core/models/user.models';
-import { Subscription } from 'rxjs';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { UserService } from '../../../services/user/user.service';
-import { Router } from '@angular/router';
-import { IRespUser } from '../../../core/interfaces/user.interface';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import Swal from 'sweetalert2';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+
+import { Subscription, map } from 'rxjs';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDividerModule } from '@angular/material/divider';
+import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
+import { UserModel, UserResModel } from '../../../core/models/user.models';
+import { UserService } from '../../../services/user/user.service';
+import { IRespUser } from '../../../core/interfaces/user.interface';
 
 @Component({
   selector: 'app-view-users',
   standalone: true,
-  imports: [MatListModule,
+  imports: [ MatListModule,
     MatCardModule,
     MatProgressSpinnerModule,
     MatTableModule,
     MatSortModule,
     MatButtonModule,
     MatDividerModule,
-    MatIconModule],
+    MatIconModule,],
   templateUrl: './view-users.component.html',
   styleUrl: './view-users.component.scss'
 })
-export class ViewUsersComponent {
+export class ViewUsersComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
 
   displayedColumns: string[] = [

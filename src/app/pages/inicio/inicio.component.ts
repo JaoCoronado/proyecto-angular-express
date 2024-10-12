@@ -1,38 +1,35 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
-import { UserService } from '../../services/user/user.service';
-import { StoreService } from '../../services/store/store.service';
-import { IRespUser, IUser } from '../../core/interfaces/user.interface';
-import { Subscription, map } from 'rxjs';
-import { UserModel, UserResModel } from '../../core/models/user.models';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatListModule } from '@angular/material/list';
-import { MatCardModule } from '@angular/material/card';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
+import { Component, inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { LoginService } from '../../services/login/login.service';
 
 @Component({
   selector: 'app-inicio',
   standalone: true,
-  imports: [
-
-  ],
+  imports: [ReactiveFormsModule, FormsModule],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.scss',
 })
-export class InicioComponent   {
+export class InicioComponent implements OnInit {
+
+loginForm: FormGroup;
+formBuilder = inject(FormBuilder);
+loginService = inject(LoginService);
+
+ngOnInit(): void {
+  this.loginForm = this.formBuilder.group({
+    email: ['', [Validators.required]],
+    password: ['', [Validators.required]],
+  });
+}
+
+loguearce(){
+  this.loginService.login(this.loginForm.value).subscribe(
+    (resp: any) => {
+      console.log(resp);
+    }
+  )
+}
+
+
 
 }

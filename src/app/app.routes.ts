@@ -30,6 +30,16 @@ export const routes: Routes = [
     component: CreateUserComponent
   },
   {
+    path: 'usuarios',
+    title: 'usuarios',
+    component: ViewUsersComponent
+  },
+  {
+    path: 'crear-tienda',
+    title: 'Crear una Tienda',
+    component: CreateStoreComponent
+  },
+  {
     path: 'galeria',
     title: 'Galeria',
     component: GaleriaComponent,
@@ -43,5 +53,10 @@ export const routes: Routes = [
     path: 'contacto',
     title: 'Contacto',
     component: ContactoComponent,
+  },
+  {
+    path: 'stores',
+    title: 'Stores',
+    component: StoresComponent,
   },
 ];
