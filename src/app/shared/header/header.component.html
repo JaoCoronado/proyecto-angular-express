@@ -1,33 +1,50 @@
-<!-- <ul>
-  <li><a routerLink="">Inicio</a></li>
-  <li><a routerLink="articulo">Artículo</a></li>
-  <li><a routerLink="galeria">Galeria</a></li>
-  <li><a routerLink="contacto">Contacto</a></li>
-</ul> -->
+<div class="container-fluid d-flex justify-content-center">
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-light shadow-sm fixed-top">
+      <div class="container-fluid">
+        <!-- Logo en la barra de navegación -->
+        <a class="navbar-brand text-center text-white" href="#">
+          <img
+            src="assets/ImgLogo/LogoJairDev.png"
+            alt="Logo"
+            width="70"
+            height="50"
+            class="d-inline-block align-text-middle p-1 bg-light mx-1 logo-blur"
+          />
+          Proyecto CRM
+        </a>
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNavAltMarkup"
-      aria-controls="navbarNavAltMarkup"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" routerLink="">inicio</a>
-        <a class="nav-link" routerLink="usuarios">Usuarios</a>
-        <a class="nav-link" routerLink="stores">Stores</a>
-        <a class="nav-link" routerLink="articulo">Artículo</a>
-        <a class="nav-link" routerLink="galeria">Galeria</a>
-        <a class="nav-link disabled" routerLink="contacto">Contacto</a>
+        <!-- Botón para togglear el menú en pantallas pequeñas -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Enlaces de navegación -->
+        <div class="collapse navbar-collapse mx-3" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link active text-white" aria-current="page" routerLink="inicio"
+              >Inicio</a
+            >
+            <a class="nav-link  text-white" routerLink="inicio/usuarios">Usuarios</a>
+            <a class="nav-link  text-white" routerLink="inicio/stores">Tiendas</a>
+          <a class="nav-link  text-white" routerLink="inicio/articulo">Artículo</a>
+         <!--  <a class="nav-link  text-white" routerLink="inicio/galeria">Galería</a>-->
+        <a class="nav-link  text-white" routerLink="inicio/contacto">Contacto</a> 
+          </div>
+        </div>
+
+        <!-- Botón de cierre de sesión -->
+        <button class="btn btn-outline-light btn-sm" (click)="logOut()">
+          Cerrar sesión
+        </button>
       </div>
-    </div>
-  </div>
-</nav>
+    </nav>
+</div>

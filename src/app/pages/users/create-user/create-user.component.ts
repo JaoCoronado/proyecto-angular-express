@@ -35,6 +35,7 @@ export class CreateUserComponent implements OnInit {
       name: ['', [Validators.required]],
       documentNumber: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
       role: ['', []],
     });
   }
@@ -43,7 +44,7 @@ export class CreateUserComponent implements OnInit {
 
   recibirDatos() {
     this.userService.createUser(this.userForm.value).subscribe((resp: any) => {
-      Swal.fire('Usuario Creado');
+      Swal.fire('Usuario Creado',`${this.userForm.value.name}`, 'success');
       console.log(this.userForm);
       this.router.navigateByUrl('/')
     });

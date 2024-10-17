@@ -33,7 +33,7 @@
 }
 
 .article-image img {
-  max-width: 100%;
+  max-width: 60%;
   border-radius: 8px;
 }
 
@@ -75,4 +75,15 @@
 .article-footer p {
   padding-top: 10px;
   border-top: 1px solid #ddd;
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0);
 }

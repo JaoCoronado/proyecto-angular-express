@@ -1,0 +1,25 @@
+table {
+  width: 100%;
+}
+
+table th.mat-sort-header-sorted {
+  justify-content: center !important;
+  // color: black;
+}
+
+.animate-fade-up {
+  opacity: 0;
+  transform: translateY(100px);
+  animation: fadeUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

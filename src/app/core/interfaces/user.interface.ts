@@ -4,6 +4,7 @@ export interface IUser {
   documentNumber: string;
   name: string;
   email: string;
+  password: string;
   role?: string;
 }
 

@@ -9,56 +9,74 @@ import { CreateUserComponent } from './pages/users/create-user/create-user.compo
 import { ViewUsersComponent } from './pages/users/view-users/view-users.component';
 import { StoresComponent } from './pages/stores/stores.component';
 import { CreateStoreComponent } from './pages/stores/create-store/create-store.component';
+import { loginGuard } from './core/guards/login/login.guard';
+import { LoginComponent } from './auth/login/login.component';
+import { Component } from '@angular/core';
 
 export const routes: Routes = [
   {
-    path: '',
+    path: 'auth',
+    title: 'Iniciar sesión',
+    children: [
+      {path: 'login',
+      component: LoginComponent
+      }
+    ]
+  },
+  {
+    path: 'inicio',
     title: 'Inicio',
-    component: InicioComponent,
+    canActivate: [loginGuard],
+    children: [
+      //path por defecto del path padre
+      {path: "",title: "Inicio de la aplicación",component: InicioComponent},
+      {
+        path: 'persona',
+        title: 'App de Personas',
+        component: PersonaComponent,
+      },
+      {
+        path: 'usuarios',
+        title: 'Usuarios',
+        component: ViewUsersComponent,
+      },
+      {
+        path: 'crear-usuario',
+        title: 'Crear un Usuario',
+        component: CreateUserComponent,
+      },
+      {
+        path: 'usuarios',
+        title: 'usuarios',
+        component: ViewUsersComponent,
+      },
+      {
+        path: 'crear-tienda',
+        title: 'Crear una Tienda',
+        component: CreateStoreComponent,
+      },
+      {
+        path: 'galeria',
+        title: 'Galeria',
+        component: GaleriaComponent,
+      },
+      {
+        path: 'articulo',
+        title: 'Articulo',
+        component: ArticuloComponent,
+      },
+      {
+        path: 'contacto',
+        title: 'Contacto',
+        component: ContactoComponent,
+      },
+      {
+        path: 'stores',
+        title: 'Stores',
+        component: StoresComponent,
+      },
+    ],
   },
-  {
-    path: 'persona',
-    title: 'App de Personas',
-    component: PersonaComponent,
-  },
-  {
-    path: 'usuarios',
-    title: 'Usuarios',
-    component: ViewUsersComponent
-  },
-  {
-    path: 'crear-usuario',
-    title: 'Crear un Usuario',
-    component: CreateUserComponent
-  },
-  {
-    path: 'usuarios',
-    title: 'usuarios',
-    component: ViewUsersComponent
-  },
-  {
-    path: 'crear-tienda',
-    title: 'Crear una Tienda',
-    component: CreateStoreComponent
-  },
-  {
-    path: 'galeria',
-    title: 'Galeria',
-    component: GaleriaComponent,
-  },
-  {
-    path: 'articulo',
-    title: 'Articulo',
-    component: ArticuloComponent,
-  },
-  {
-    path: 'contacto',
-    title: 'Contacto',
-    component: ContactoComponent,
-  },
-  {
-    path: 'stores',
-    title: 'Stores',
-    component: StoresComponent,
-  },
+  // si la ruta no existe, redireccion siempre al login
+  { path: '**', redirectTo: 'auth/login', pathMatch: 'full' },
 ];

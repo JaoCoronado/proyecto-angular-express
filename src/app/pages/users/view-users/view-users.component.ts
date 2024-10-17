@@ -39,8 +39,17 @@ import { IRespUser } from '../../../core/interfaces/user.interface';
   styleUrl: './view-users.component.scss'
 })
 export class ViewUsersComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild(MatSort) sort: MatSort;
-
+  
+  dataSource: any = '';
+  
+  users: UserResModel[] = [];
+  
+  userSubscription: Subscription;
+  
+  private _liveAnnouncer = inject(LiveAnnouncer);
+  private userService = inject(UserService);
+  private router = inject(Router)
+  
   displayedColumns: string[] = [
     '_id',
     'name',
@@ -49,22 +58,17 @@ export class ViewUsersComponent implements OnInit, AfterViewInit, OnDestroy {
     'role',
     'action',
   ];
-  dataSource: any = '';
-
-  users: UserResModel[] = [];
-
-  userSubscription: Subscription;
-
-  private _liveAnnouncer = inject(LiveAnnouncer);
-  private userService = inject(UserService);
-  private router = inject(Router)
-
+  
+  @ViewChild(MatSort) sort: MatSort;
+  userRole: string | null;
+  
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
   }
 
   ngOnInit() {
     this.loadUser();
+    this.userRole = localStorage.getItem('userRole');
   }
 
   ngOnDestroy(): void {
@@ -129,7 +133,7 @@ export class ViewUsersComponent implements OnInit, AfterViewInit, OnDestroy {
           Swal.fire('Usuario Eliminado!', `${resp.msg}`, 'success');
         });
       } else if (result.isDismissed) {
-        Swal.fire('No lo elimina', '', 'info');
+        Swal.fire('Usuario no eliminado', '', 'info');
       }
     });
   }
@@ -201,7 +205,7 @@ export class ViewUsersComponent implements OnInit, AfterViewInit, OnDestroy {
         console.log('Datos actualizados:', result.value);
         this.userService.userUpdate(usuarioEditado).subscribe((resp: any) => {
           this.loadUser();
-          Swal.fire('Usuario Editado!', `${resp.msg}`, 'success');
+          Swal.fire('Usuario Editado!', `${result.value.name}`, 'success');
         });;
       }
     });
@@ -209,6 +213,6 @@ export class ViewUsersComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   addUser(){
-this.router.navigateByUrl('crear-usuario')
+this.router.navigateByUrl('inicio/crear-usuario')
   }
 }

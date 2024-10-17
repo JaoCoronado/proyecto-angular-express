@@ -1,0 +1,58 @@
+<div
+  class="container justify-content-center aling-items-center mb-5 animate-fade-up"
+  style="padding-top: 70px"
+>
+  <div class="row justify-content-center m-5">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h3 class="text-center mb-4">Iniciar sesión</h3>
+          <form [formGroup]="loginForm" (ngSubmit)="loguearce()">
+            <div class="form-group mb-3">
+              <label for="email">Correo electrónico</label>
+              <input
+                id="email"
+                type="email"
+                class="form-control"
+                formControlName="email"
+                placeholder="Ingrese su correo"
+              />
+              @if (formulario['email'].hasError('required') &&
+              formulario['email'].touched) {
+              <small class="text-danger"> El email es obligatorio </small>
+              }
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="password">Contraseña</label>
+              <input
+                id="password"
+                type="password"
+                class="form-control"
+                placeholder="Ingrese su contraseña"
+                formControlName="password"
+              />
+              @if (formulario['password'].hasError('required') &&
+              formulario['password'].touched) {
+              <small class="text-danger"> La contraseña es obligatoria </small>
+              }
+            </div>
+
+            <div class="d-flex justify-content-center">
+              <button type="button" class="btn btn-danger btn-sm mx-2">
+                Cancelar
+              </button>
+              <button
+                type="submit"
+                class="btn btn-primary btn-sm"
+                [disabled]="loginForm.invalid"
+              >
+                Ingresar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

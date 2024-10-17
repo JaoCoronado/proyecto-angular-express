@@ -1,122 +1,140 @@
-<h4>Stores</h4>
-
-<div>
-  <button class="btn btn-primary m-3" (click)="addStore()">Agregar Tienda</button>
-</div>
-
-
-@if (!!stores) {
-<table
-  mat-table
-  [dataSource]="dataSource"
-  matSort
-  (matSortChange)="announceSortChange($event)"
-  class="mat-elevation-z8 table table-striped table-hover table-sm"
+<div
+  class="container-fluid justify-content-center animate-fade-up"
+  style="padding-top: 80px"
 >
-  <!-- Position Column -->
-  <ng-container class="text-center align-middle" matColumnDef="_id">
-    <th
-      class="fs-5 text-danger m-1"
-      *matHeaderCellDef
-      mat-sort-header
-      sortActionDescription="Sort by number"
-    >
-      ID
-    </th>
-    <td mat-cell *matCellDef="let element">{{ element._id }}</td>
-  </ng-container>
+  <h4 class="text-center my-2 text-danger">Tiendas</h4>
 
-  <!-- Name Column -->
-  <ng-container class="text-center align-middle" matColumnDef="name">
-    <th
-      class="fs-5 text-danger m-1"
-      mat-header-cell
-      *matHeaderCellDef
-      mat-sort-header
-      sortActionDescription="Sort by name"
-    >
-      Nombre
-    </th>
-    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-  </ng-container>
+  <div class="d-flex">
+    <button class="btn btn-warning btn-sm" (click)="addStore()">
+      Agregar Tienda
+    </button>
+  </div>
 
-  
-  <ng-container class="text-center align-middle" matColumnDef="address">
-    <th
-      class="fs-5 text-danger m-1"
-      mat-header-cell
-      *matHeaderCellDef
-      mat-sort-header
-      sortActionDescription="Sort by weight"
-    >
-      Dirección
-    </th>
-    <td mat-cell *matCellDef="let element">{{ element.address }}</td>
-  </ng-container>
+  @if (!!stores) {
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    (matSortChange)="announceSortChange($event)"
+    class="mat-elevation-z8 table table-striped table-hover table-responsive-lg mt-4"
+  >
+    <!-- Position Column -->
+    <ng-container class="text-center align-middle" matColumnDef="_id">
+      <th
+        class="fs-5 text-danger m-1"
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by number"
+      >
+        ID
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element._id }}</td>
+    </ng-container>
 
+    <!-- Name Column -->
+    <ng-container class="text-center align-middle" matColumnDef="name">
+      <th
+        class="fs-5 text-danger m-1"
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by name"
+      >
+        Nombre
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
 
-  <ng-container class="text-center align-middle" matColumnDef="price">
-    <th
-      class="fs-5 text-danger m-1"
-      mat-header-cell
-      *matHeaderCellDef
-      mat-sort-header
-      sortActionDescription="Sort by symbol"
-    >
-      Precio
-    </th>
-    <td mat-cell *matCellDef="let element">{{ element.price }}</td>
-  </ng-container>
+    <ng-container class="text-center align-middle" matColumnDef="address">
+      <th
+        class="fs-5 text-danger m-1"
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by weight"
+      >
+        Dirección
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.address }}</td>
+    </ng-container>
 
-  <ng-container class="text-center align-middle" matColumnDef="phone">
-    <th
-      class="fs-5 text-danger m-1"
-      mat-header-cell
-      *matHeaderCellDef
-      mat-sort-header
-      sortActionDescription="Sort by symbol"
-    >
-      Telefono
-    </th>
-    <td mat-cell *matCellDef="let element">{{ element.phone }}</td>
-  </ng-container>
-  <ng-container class="text-center align-middle" matColumnDef="createdAt">
-    <th
-      class="fs-5 text-danger m-1"
-      mat-header-cell
-      *matHeaderCellDef
-      mat-sort-header
-      sortActionDescription="Sort by symbol"
-    >
-      createdAt
-    </th>
-    <td mat-cell *matCellDef="let element">{{ element.createdAt }}</td>
-  </ng-container>
+    <ng-container class="text-center align-middle" matColumnDef="price">
+      <th
+        class="fs-5 text-danger m-1"
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by symbol"
+      >
+        Precio
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.price }}</td>
+    </ng-container>
 
-  <ng-container class="text-center align-middle" matColumnDef="action">
-    <th
-      class="fs-5 text-danger m-1"
-      mat-header-cell
-      *matHeaderCellDef
-      mat-sort-header
-      sortActionDescription="Sort by symbol"
-    >
-      Action
-    </th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-stroked-button (click)="infoStore(element)">Ver</button>
-      <button mat-stroked-button (click)="editStore(element)">Edit</button>
-      <button mat-stroked-button (click)="deleteStore(element)">Delete</button>
+    <ng-container class="text-center align-middle" matColumnDef="phone">
+      <th
+        class="fs-5 text-danger m-1"
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by symbol"
+      >
+        Telefono
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.phone }}</td>
+    </ng-container>
+    <ng-container class="text-center align-middle" matColumnDef="createdAt">
+      <th
+        class="fs-5 text-danger m-1"
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by symbol"
+      >
+        createdAt
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.createdAt }}</td>
+    </ng-container>
 
+    <ng-container class="d-flex justify-content-center" matColumnDef="action">
+      <th
+        class="fs-5 text-danger m-1 text-center"
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by symbol"
+      >
+        Accion
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          class="btn btn-outline-primary btn-sm"
+          (click)="infoStore(element)"
+        >
+          ver
+        </button>
+        <button
+          class="btn btn-outline-success btn-sm mx-1"
+          (click)="editStore(element)"
+        >
+          Editar
+        </button>
+        <button
+          class="btn btn-outline-danger btn-sm"
+          (click)="deleteStore(element)"
+        >
+          Eliminar
+        </button>
+      </td>
+    </ng-container>
 
-    </td>
-  </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table>
+  } @else {
 
-} @else {
-
-<mat-spinner></mat-spinner>
-}
+  <mat-spinner></mat-spinner>
+  }
+</div>

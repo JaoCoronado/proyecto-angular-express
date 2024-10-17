@@ -4,6 +4,7 @@ export class UserModel {
     public documentNumber: string,
     public name: string,
     public createdAt: Date,
+    public email?: string,
     public role?: string,
     public password?: string
   ) {}
@@ -15,6 +16,7 @@ export class UserResModel {
     public documentNumber: string,
     public name: string,
     public createdAt: Date,
+    public email: string,
     public role?: string,
   ) {}
 }

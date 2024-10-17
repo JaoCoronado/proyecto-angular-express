@@ -23,6 +23,7 @@ import { MatButtonModule } from '@angular/material/button';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-stores',
   standalone: true,
@@ -88,7 +89,7 @@ export class StoresComponent implements OnInit, AfterViewInit, OnDestroy {
       });
   }
 
-  infoStore(element: StoreModel) {
+ infoStore(element: StoreModel) {
     const createdAtFormatted = element.createdAt
       ? new Date(element.createdAt).toLocaleString('es-ES', {
           weekday: 'long',
@@ -221,6 +222,6 @@ export class StoresComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   addStore() {
-    this.router.navigateByUrl('crear-tienda');
+    this.router.navigateByUrl('inicio/crear-tienda');
   }
 }
