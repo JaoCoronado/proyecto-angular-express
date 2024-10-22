@@ -4,7 +4,6 @@ import { InicioComponent } from './pages/inicio/inicio.component';
 import { ArticuloComponent } from './pages/articulo/articulo.component';
 import { ContactoComponent } from './pages/contacto/contacto.component';
 import { GaleriaComponent } from './pages/galeria/galeria.component';
-import { PersonaComponent } from './pages/persona/persona.component';
 import { CreateUserComponent } from './pages/users/create-user/create-user.component';
 import { ViewUsersComponent } from './pages/users/view-users/view-users.component';
 import { StoresComponent } from './pages/stores/stores.component';
@@ -12,6 +11,10 @@ import { CreateStoreComponent } from './pages/stores/create-store/create-store.c
 import { loginGuard } from './core/guards/login/login.guard';
 import { LoginComponent } from './auth/login/login.component';
 import { Component } from '@angular/core';
+import { ViewVehiclesComponent } from './pages/vehicles/view-vehicles/view-vehicles.component';
+import { CreateVehiclesComponent } from './pages/vehicles/create-vehicles/create-vehicles.component';
+import { WorkOrdersComponent } from './pages/workOrders/work-orders/work-orders.component';
+import { CreateWorkOrderComponent } from './pages/workOrders/create-work-order/create-work-order.component';
 
 export const routes: Routes = [
   {
@@ -31,11 +34,6 @@ export const routes: Routes = [
       //path por defecto del path padre
       {path: "",title: "Inicio de la aplicación",component: InicioComponent},
       {
-        path: 'persona',
-        title: 'App de Personas',
-        component: PersonaComponent,
-      },
-      {
         path: 'usuarios',
         title: 'Usuarios',
         component: ViewUsersComponent,
@@ -54,6 +52,26 @@ export const routes: Routes = [
         path: 'crear-tienda',
         title: 'Crear una Tienda',
         component: CreateStoreComponent,
+      },
+      {
+        path: 'vehicles',
+        title: 'Vehiculos',
+        component: ViewVehiclesComponent,
+      },
+      {
+        path: 'crear-vehiculo',
+        title: 'Crear un Vehiculo',
+        component: CreateVehiclesComponent,
+      },
+      {
+        path: 'workOrders',
+        title: 'Ordenes de Trabajo',
+        component: WorkOrdersComponent,
+      },
+      {
+        path : 'create-workOrder',
+        title: 'Crear Orden de Trabajo',
+        component: CreateWorkOrderComponent,
       },
       {
         path: 'galeria',

@@ -59,6 +59,53 @@
             </div>
           </div>
 
+          <div class="col-md-4 mt-2">
+            <div class="md-3">
+              <label> Ciudad</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Ingrese la ciudad del usuario"
+                formControlName="city"
+              />
+              @if (formulario['city'].hasError('required') &&
+              formulario['city'].touched) {
+              <small class="text-danger"> la ciudad es obligatoria </small>
+              }
+            </div>
+          </div>
+
+          <div class="col-md-4 mt-2">
+            <div class="md-3">
+              <label> Dirección</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Ingrese el correo electrónico del usuario"
+                formControlName="address"
+              />
+              @if (formulario['address'].hasError('required') &&
+              formulario['address'].touched) {
+              <small class="text-danger"> la dirección es obligatoria </small>
+              }
+            </div>
+          </div>
+          <div class="col-md-4 mt-2">
+            <div class="md-3">
+              <label> Telefono</label>
+              <input
+                type="number"
+                class="form-control"
+                placeholder="Ingrese el telefono del usuario"
+                formControlName="phone"
+              />
+              @if (formulario['phone'].hasError('required') &&
+              formulario['phone'].touched) {
+              <small class="text-danger"> El telefono es obligatorio </small>
+              }
+            </div>
+          </div>
+
           <div class="col-md-4 mt-3">
             <div class="md-3">
               <label> Contraseña</label>
@@ -80,7 +127,7 @@
               <label> Rol</label>
               <select class="form-select" formControlName="role">
                 <option value="ROLE_USER">USUARIO</option>
-                <option value="ROLE_CLIENT">CLIENTE</option>
+                <!-- <option value="ROLE_CLIENT">CLIENTE</option> -->
                 <option value="ROLE_ADMIN">ADMINISTRADOR</option>
               </select>
             </div>

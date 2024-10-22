@@ -30,14 +30,11 @@
         <!-- Enlaces de navegación -->
         <div class="collapse navbar-collapse mx-3" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-link active text-white" aria-current="page" routerLink="inicio"
-              >Inicio</a
-            >
-            <a class="nav-link  text-white" routerLink="inicio/usuarios">Usuarios</a>
-            <a class="nav-link  text-white" routerLink="inicio/stores">Tiendas</a>
-          <a class="nav-link  text-white" routerLink="inicio/articulo">Artículo</a>
-         <!--  <a class="nav-link  text-white" routerLink="inicio/galeria">Galería</a>-->
-        <a class="nav-link  text-white" routerLink="inicio/contacto">Contacto</a> 
+            <a id="link-usuarios" class="nav-link text-white" routerLink="inicio/usuarios" (click)="setActive('link-usuarios')">Usuarios</a>
+            <a id="link-vehicles" class="nav-link text-white" routerLink="inicio/vehicles" (click)="setActive('link-vehicles')">Vehículos</a>
+            <a id="link-workOrders" class="nav-link text-white" routerLink="inicio/workOrders" (click)="setActive('link-workOrders')">Ordenes de trabajo</a>
+            <a id="link-articulo" class="nav-link text-white" routerLink="inicio/articulo" (click)="setActive('link-articulo')">Artículo</a>
+            <a id="link-contacto" class="nav-link text-white" routerLink="inicio/contacto" (click)="setActive('link-contacto')">Contacto</a>
           </div>
         </div>
 

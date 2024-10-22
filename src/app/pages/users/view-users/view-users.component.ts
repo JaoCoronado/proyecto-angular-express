@@ -27,41 +27,42 @@ import { IRespUser } from '../../../core/interfaces/user.interface';
 @Component({
   selector: 'app-view-users',
   standalone: true,
-  imports: [ MatListModule,
+  imports: [
+    MatListModule,
     MatCardModule,
     MatProgressSpinnerModule,
     MatTableModule,
     MatSortModule,
     MatButtonModule,
     MatDividerModule,
-    MatIconModule,],
+    MatIconModule,
+  ],
   templateUrl: './view-users.component.html',
-  styleUrl: './view-users.component.scss'
+  styleUrl: './view-users.component.scss',
 })
 export class ViewUsersComponent implements OnInit, AfterViewInit, OnDestroy {
-  
   dataSource: any = '';
-  
+
   users: UserResModel[] = [];
-  
+
   userSubscription: Subscription;
-  
+
   private _liveAnnouncer = inject(LiveAnnouncer);
   private userService = inject(UserService);
-  private router = inject(Router)
-  
+  private router = inject(Router);
+
   displayedColumns: string[] = [
     '_id',
     'name',
     'documentNumber',
-    'createdAt',
+    'phone',
     'role',
     'action',
   ];
-  
+
   @ViewChild(MatSort) sort: MatSort;
   userRole: string | null;
-  
+
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
   }
@@ -102,18 +103,185 @@ export class ViewUsersComponent implements OnInit, AfterViewInit, OnDestroy {
         day: 'numeric',
       }
     );
+    const tableContent = `
+    <table class="table table-hover table-striped">
+      <tbody>
+        <tr>
+          <th scope="row" class="text-start text-primary fs-6">Nombre</th>
+          <td class="fs-6"" class="fs-6">${element.name || '-'}</td>
+        </tr>
+        <tr>
+          <th scope="row" class="text-start text-primary fs-6">Número de Documento</th>
+          <td class="fs-6"">${element.documentNumber || '-'}</td>
+        </tr>
+        <tr>
+          <th scope="row" class="text-start text-primary fs-6">Correo Electrónico</th>
+          <td class="fs-6"">${element.email || '-'}</td>
+        </tr>
+        <tr>
+          <th scope="row" class="text-start text-primary fs-6">Teléfono</th>
+          <td class="fs-6"">${element.phone || '-'}</td>
+        </tr>
+        <tr>
+          <th scope="row" class="text-start text-primary fs-6">Ciudad</th>
+          <td class="fs-6"">${element.city || '-'}</td>
+        </tr>
+        <tr>
+          <th scope="row" class="text-start text-primary fs-6">Dirección</th>
+          <td class="fs-6"">${element.address || '-'}</td>
+        </tr>
+        <tr>
+          <th scope="row" class="text-start text-primary fs-6">Rol</th>
+          <td class="fs-6"">${element.role || '-'}</td>
+        </tr>
+        <tr>
+          <th scope="row" class="text-start text-primary fs-6">Fecha de Creación</th>
+          <td class="fs-6" >${createdAtFormatted || '-'}</td>
+        </tr>
+      </tbody>
+    </table>
+  `;
+
     Swal.fire({
       title: 'Información del Usuario',
-      html: `
-        <span class="badge bg-primary">ID:</span> <p class="fw-normal">${element._id}</p>
-        <span class="badge bg-primary">Name:</span> <p class="fw-normal">${element.name}</p>
-        <span class="badge bg-primary">Document Number:</span> <p class="fw-normal">${element.documentNumber}</p>
-        <span class="badge bg-primary">Created At:</span> <p class="fw-normal">${createdAtFormatted}</p>
-        <span class="badge bg-primary">Role:</span> <p class="fw-normal">${element.role}</p>
-      `,
+      html: tableContent,
       icon: 'success',
       confirmButtonColor: '#22bb33',
       confirmButtonText: 'OK',
+    });
+  }
+
+  editUser(element: UserResModel) {
+    const createdAtFormatted = new Date(element.createdAt).toLocaleString(
+      'es-ES',
+      {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      }
+    );
+
+    const formContent = `
+      <form>
+        <table class="table table-striped table-hover">
+          <tbody>
+            <tr>
+              <th scope="row" class="text-start text-success fs-6">Nombre</th>
+              <td>
+                <input type="text" class="form-control form-control-sm" id="userName" value="${element.name}" />
+              </td>
+            </tr>
+            <tr>
+              <th scope="row" class="text-start text-success fs-6">Número de Documento</th>
+              <td>
+                <input type="number" class="form-control form-control-sm" id="userDocumentNumber" value="${element.documentNumber}" />
+              </td>
+            </tr>
+            <tr>
+              <th scope="row" class="text-start text-success fs-6">Correo Electrónico</th>
+              <td>
+                <input type="email" class="form-control form-control-sm" id="userEmail" value="${element.email}" />
+              </td>
+            </tr>
+            <tr>
+              <th scope="row" class="text-start text-success fs-6">Teléfono</th>
+              <td>
+                <input type="number" class="form-control form-control-sm" id="userPhone" value="${element.phone}" />
+              </td>
+            </tr>
+            <tr>
+              <th scope="row" class="text-start text-success fs-6">Ciudad</th>
+              <td>
+                <input type="text" class="form-control form-control-sm" id="userCity" value="${element.city}" />
+              </td>
+            </tr>
+            <tr>
+              <th scope="row" class="text-start text-success fs-6">Dirección</th>
+              <td>
+                <input type="text" class="form-control form-control-sm" id="userAddress" value="${element.address}" />
+              </td>
+            </tr>
+            <tr>
+              <th scope="row" class="text-start text-success fs-6">Rol</th>
+              <td>
+                <input type="text" class="form-control form-control-sm" id="userRole" value="${element.role}" />
+              </td>
+            </tr>
+            <tr>
+              <th scope="row" class="text-start text-success fs-6">Fecha de Creación</th>
+              <td>
+                <input type="text" class="form-control form-control-sm" id="userCreatedAt" value="${createdAtFormatted}" readonly />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    `;
+
+    Swal.fire({
+      title: 'Editar Información del Usuario',
+      html: formContent,
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#22bb33',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Guardar Cambios',
+      preConfirm: () => {
+        const userId = element._id;
+        const userName = document.getElementById(
+          'userName'
+        ) as HTMLInputElement;
+        const userDocumentNumber = document.getElementById(
+          'userDocumentNumber'
+        ) as HTMLInputElement;
+        const userEmail = document.getElementById(
+          'userEmail'
+        ) as HTMLInputElement;
+        const userPhone = document.getElementById(
+          'userPhone'
+        ) as HTMLInputElement;
+        const userCity = document.getElementById(
+          'userCity'
+        ) as HTMLInputElement;
+        const userAddress = document.getElementById(
+          'userAddress'
+        ) as HTMLInputElement;
+        const userRole = document.getElementById(
+          'userRole'
+        ) as HTMLInputElement;
+
+        return {
+          _id: userId,
+          name: userName.value,
+          documentNumber: userDocumentNumber.value,
+          email: userEmail.value,
+          phone: userPhone.value,
+          city: userCity.value,
+          address: userAddress.value,
+          role: userRole.value,
+        };
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const usuarioEditado: UserModel = {
+          _id: result.value._id,
+          documentNumber: result.value.documentNumber,
+          name: result.value.name,
+          createdAt: element.createdAt,
+          role: result.value.role,
+          email: result.value.email,
+          phone: result.value.phone,
+          city: result.value.city,
+          address: result.value.address,
+        };
+
+        console.log('Datos actualizados:', result.value);
+        this.userService.userUpdate(usuarioEditado).subscribe((resp: any) => {
+          this.loadUser();
+          Swal.fire('Usuario Editado!', `${result.value.name}`, 'success');
+        });
+      }
     });
   }
 
@@ -137,82 +305,8 @@ export class ViewUsersComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
   }
-  editUser(element: UserResModel) {
-    const createdAtFormatted = new Date(element.createdAt).toLocaleString(
-      'es-ES',
-      {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      }
-    );
-    Swal.fire({
-      title: 'Editar Información del Usuario',
-      html: `
-        <form>
-          <div class="form-group mb-3">
-            <label for="userName" class="badge bg-primary">Name:</label>
-            <input type="text" id="userName" class="form-control form-control-sm" value="${element.name}" />
-          </div>
-          <div class="form-group mb-3">
-            <label for="documentNumber" class="badge bg-primary">Document Number:</label>
-            <input type="text" id="documentNumber" class="form-control form-control-sm" value="${element.documentNumber}" />
-          </div>
-          <div class="form-group mb-3">
-            <label for="createdAt" class="badge bg-primary">Created At:</label>
-            <input type="text" id="createdAt" class="form-control form-control-sm" value="${createdAtFormatted}" readonly />
-          </div>
-          <div class="form-group mb-3">
-            <label for="role" class="badge bg-primary">Role:</label>
-            <input type="text" id="role" class="form-control form-control-sm" value="${element.role}" />
-          </div>
-        </form>
-      `,
-      icon: 'info',
-      showCancelButton: true,
-      confirmButtonColor: '#22bb33',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Guardar Cambios',
-      preConfirm: () => {
-        const userId = element._id;
-        const userName = (
-          document.getElementById('userName') as HTMLInputElement
-        ).value;
-        const documentNumber = (
-          document.getElementById('documentNumber') as HTMLInputElement
-        ).value;
-        const role = (document.getElementById('role') as HTMLInputElement)
-          .value;
 
-        return {
-          _id: userId,
-          name: userName,
-          documentNumber: documentNumber,
-          role: role,
-        };
-      },
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const usuarioEditado: UserModel = {
-          _id: result.value._id,
-          documentNumber: result.value.documentNumber,
-          name: result.value.name,
-          createdAt: result.value.createdAt,
-          role: result.value.role,
-        };
-
-        console.log('Datos actualizados:', result.value);
-        this.userService.userUpdate(usuarioEditado).subscribe((resp: any) => {
-          this.loadUser();
-          Swal.fire('Usuario Editado!', `${result.value.name}`, 'success');
-        });;
-      }
-    });
-  }
-
-
-  addUser(){
-this.router.navigateByUrl('inicio/crear-usuario')
+  addUser() {
+    this.router.navigateByUrl('inicio/crear-usuario');
   }
 }

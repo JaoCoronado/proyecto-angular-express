@@ -1,0 +1,108 @@
+<div
+  class="container-fluid justify-content-center animate-fade-up"
+  style="padding-top: 80px"
+>
+  <h4 class="text-center my-2 text-danger">Crear Vehiculo</h4>
+
+  <div class="card">
+    <div class="card-body">
+      <form [formGroup]="vehicleForm" (ngSubmit)="recibirDatos()">
+        <div class="row">
+          <!-- <div class="col-md-4 mt-3">
+            <div class="md-3">
+              <label>ADMINISTRADOR</label>
+              <select class="form-select" formControlName="admin">
+                @for (user of usersAdmin; track $index) {
+                <option value="{{ user._id }}">{{ user.name }}</option>
+                }
+              </select>
+            </div>
+          </div> -->
+          <!-- Campo: Nombre del vehiculo -->
+          <div class="col-md-4 mt-2">
+            <div class="md-3">
+              <label>Nombre Usuario</label>
+              <select class="form-select" formControlName="userId">
+                @for (user of usersInfo; track $index) {
+                <option value="{{ user._id }}">{{ user.name }}</option>
+                }
+              </select>
+              @if (formulario['userId'].hasError('required') &&
+              formulario['userId'].touched) {
+              <small class="text-danger">
+                El nombre del cliente es obligatorio
+              </small>
+              }
+            </div>
+          </div>
+
+          <!-- Campo: Marca -->
+          <div class="col-md-4 mt-2">
+            <div class="md-3">
+              <label>Marca</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Ingrese la Marca del vehiculo"
+                formControlName="make"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Campo: Modelo -->
+          <div class="col-md-4 mt-2">
+            <div class="md-3">
+              <label>Modelo</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Ingrese el modelo"
+                formControlName="model"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Campo: Teléfono -->
+          <div class="col-md-4 mt-3">
+            <div class="md-3">
+              <label>Año</label>
+              <input
+                type="number"
+                class="form-control"
+                placeholder="Ingrese el Año"
+                formControlName="year"
+                required
+              />
+            </div>
+          </div>
+          <!-- Campo: Placa -->
+          <div class="col-md-4 mt-3">
+            <div class="md-3">
+              <label>Placa</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Ingrese la placa del vehiculo"
+                formControlName="licensePlate"
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4 d-flex justify-content-center">
+          <button class="btn btn-danger" type="button">Cancelar</button>
+          <button
+            type="submit"
+            class="btn btn-primary ms-2"
+            [disabled]="vehicleForm.invalid"
+          >
+            Enviar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

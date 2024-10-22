@@ -6,7 +6,10 @@ export class UserModel {
     public createdAt: Date,
     public email?: string,
     public role?: string,
-    public password?: string
+    public password?: string,
+    public city?: string,
+    public address?: string,
+    public phone?: number
   ) {}
 }
 
@@ -18,5 +21,8 @@ export class UserResModel {
     public createdAt: Date,
     public email: string,
     public role?: string,
+    public city?: string,
+    public address?: string,
+    public phone?: number
   ) {}
 }

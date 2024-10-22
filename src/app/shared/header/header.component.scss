@@ -5,3 +5,14 @@ nav.navbar {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Difuminado alrededor */
     border-radius: 7px; /* Redondea los bordes para suavizar más */
   }
+
+  .nav-link {
+    transition: all 0.3s ease; // Animación suave
+  }
+  
+  .nav-link.active {
+    font-size: 1.2em; 
+    font-weight: bold; 
+    color: black; 
+  }
+  

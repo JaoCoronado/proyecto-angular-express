@@ -2,15 +2,15 @@
   class="container-fluid justify-content-center animate-fade-up"
   style="padding-top: 80px"
 >
-  <h4 class="text-center my-2 text-primary">Gestión de Usuarios</h4>
+  <h4 class="text-center my-2 text-primary">Gestión de Vehiculos</h4>
 
   <div class="d-flex">
-    <button class="btn btn-success btn-sm" (click)="addUser()">
-      <i class="bi bi-person-plus"></i> Agregar Usuario
+    <button class="btn btn-success btn-sm" (click)="addVehicle()">
+      Agregar Vehiculo
     </button>
   </div>
 
-  @if (!!users) {
+  @if (!!vehicles) {
   <table
     mat-table
     [dataSource]="dataSource"
@@ -31,59 +31,69 @@
       <td mat-cell *matCellDef="let element">{{ element._id }}</td>
     </ng-container>
 
-    <ng-container class="text-center align-middle" matColumnDef="name">
+    <ng-container class="text-center align-middle" matColumnDef="userName">
       <th
         class="fs-5 text-primary m-1"
         mat-header-cell
         *matHeaderCellDef
         mat-sort-header
-        sortActionDescription="Ordenar por nombre"
+        sortActionDescription="Ordenar por Usuario"
       >
-        Nombre
+        Usuario
       </th>
-      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.userName }}</td>
     </ng-container>
 
-    <ng-container
-      class="text-center align-middle"
-      matColumnDef="documentNumber"
-    >
+    <ng-container class="text-center align-middle" matColumnDef="make">
       <th
         class="fs-5 text-primary m-1"
         mat-header-cell
         *matHeaderCellDef
         mat-sort-header
-        sortActionDescription="Ordenar por número de documento"
+        sortActionDescription="Ordenar por Marca"
       >
-        Número de Documento
+        Marca
       </th>
-      <td mat-cell *matCellDef="let element">{{ element.documentNumber }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.make }}</td>
     </ng-container>
 
-    <ng-container class="text-center align-middle" matColumnDef="phone">
+    <ng-container class="text-center align-middle" matColumnDef="model">
       <th
         class="fs-5 text-primary m-1"
         mat-header-cell
         *matHeaderCellDef
         mat-sort-header
-        sortActionDescription="Ordenar por telefono de creación"
+        sortActionDescription="Ordenar por modelo"
       >
-        Telefono
+        Modelo
       </th>
-      <td mat-cell *matCellDef="let element">{{ element.phone }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.model }}</td>
     </ng-container>
 
-    <ng-container class="text-center align-middle" matColumnDef="role">
+    <ng-container class="text-center align-middle" matColumnDef="year">
       <th
         class="fs-5 text-primary m-1"
         mat-header-cell
         *matHeaderCellDef
         mat-sort-header
-        sortActionDescription="Ordenar por rol"
+        sortActionDescription="Ordenar por año"
       >
-        Rol
+        Año
       </th>
-      <td mat-cell *matCellDef="let element">{{ element.role }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.year }}</td>
+    </ng-container>
+
+    <ng-container class="text-center align-middle" matColumnDef="licensePlate">
+      <th
+        class="fs-5 text-primary m-1"
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Ordenar por Placa"
+      >
+        Placa
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.licensePlate }}</td>
     </ng-container>
 
     <ng-container class="text-center align-middle" matColumnDef="action">
@@ -99,23 +109,19 @@
       <td mat-cell *matCellDef="let element">
         <button
           class="btn btn-outline-primary btn-sm"
-          (click)="infoUser(element)"
+          (click)="infoVehicle(element)"
         >
-          <!-- <i class="bi bi-eye"></i>  -->
           Ver
         </button>
         <button
           class="btn btn-outline-success btn-sm mx-1"
-          (click)="editUser(element)"
-          [disabled]="userRole !== 'ROLE_ADMIN'"
+          (click)="editVehicle(element)"
         >
-          <!-- <i class="bi bi-pencil"></i>  -->
           Editar
         </button>
         <button
           class="btn btn-outline-danger btn-sm"
-          (click)="deleteUser(element)"
-          [disabled]="userRole !== 'ROLE_ADMIN'"
+          (click)="deleteVehicle(element)"
         >
           <!-- <i class="bi bi-trash"></i>  -->
           Eliminar

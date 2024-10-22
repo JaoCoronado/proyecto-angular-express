@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { PersonaComponent } from './pages/persona/persona.component';
 import { TablaComponent } from './components/tabla/tabla.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -10,7 +9,6 @@ import { FooterComponent } from './shared/footer/footer.component';
   standalone: true,
   imports: [
     RouterOutlet,
-    PersonaComponent,
     TablaComponent,
     HeaderComponent,
     FooterComponent,
