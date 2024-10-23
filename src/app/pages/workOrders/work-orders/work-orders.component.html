@@ -5,7 +5,11 @@
   <h4 class="text-center my-2 text-primary">Gestión de Ordenes de Trabajo</h4>
 
   <div class="d-flex">
-    <button class="btn btn-success btn-sm" (click)="addWorkOrder()">
+    <button
+      class="btn btn-success btn-sm"
+      (click)="addWorkOrder()"
+      [disabled]="userRole !== 'ROLE_ADMIN'"
+    >
       Agregar Orden de Trabajo
     </button>
   </div>
@@ -107,28 +111,26 @@
         Acciones
       </th>
       <td mat-cell *matCellDef="let element">
-<!--         
         <button
           class="btn btn-outline-primary btn-sm"
-          (click)="infoVehicle(element)"
+          (click)="infoWorkOrder(element)"
         >
           Ver
         </button>
         <button
           class="btn btn-outline-success btn-sm mx-1"
-          (click)="editVehicle(element)"
+          (click)="editWorkOrder(element)"
+          [disabled]="userRole !== 'ROLE_ADMIN'"
         >
           Editar
         </button>
         <button
           class="btn btn-outline-danger btn-sm"
-          (click)="deleteVehicle(element)"
+          (click)="deleteWorkOrder(element)"
+          [disabled]="userRole !== 'ROLE_ADMIN'"
         >
-         
           Eliminar
-        </button> 
-    -->
-
+        </button>
       </td>
     </ng-container>
 

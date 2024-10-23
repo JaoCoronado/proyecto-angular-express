@@ -4,8 +4,10 @@ import { LoginModel } from '../../core/models/login.model';
 import { tap, Observable, map, catchError, of } from 'rxjs';
 import { UserModel } from '../../core/models/user.models';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { environment } from '../../../environments/environment.development';
 
-const urlApi: string = 'http://localhost:4000/api/v1';
+const urlApi: string = environment.baseUrl;
 
 @Injectable({
   providedIn: 'root',
@@ -52,6 +54,11 @@ export class LoginService {
         }),
         catchError((error) => {
           console.error(error);
+          Swal.fire(
+            'Iniciar sesion',
+            'No haz iniciado sesion!!',
+            'error',
+          );
           return of(false)
         })
       );

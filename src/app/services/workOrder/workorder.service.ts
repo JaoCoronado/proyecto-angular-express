@@ -6,8 +6,10 @@ import {
   IWorkOrder,
 } from '../../core/interfaces/workOrder.interface';
 import { WorkOrderModel } from '../../core/models/workOrder.model';
+import { environment } from '../../../environments/environment.development';
 
-const urlApi: string = 'http://localhost:4000/api/v1';
+// const urlApi: string = 'http://localhost:4000/api/v1';
+const urlApi: string = environment.baseUrl;
 @Injectable({
   providedIn: 'root',
 })
@@ -34,11 +36,7 @@ export class WorkorderService {
   }
 
   updateWorkOrderById(workOrder: WorkOrderModel){
-    return this.httpClient
-      .put<IRespWorkOrder>(
-        `${urlApi}/workOrder/update/${workOrder._id}`,
-        workOrder
-      )
+    return this.httpClient.put<IRespWorkOrder>(`${urlApi}/workOrder/update/${workOrder._id}`,workOrder)
   }
 
   deleteWorkOrderById(id: string) {

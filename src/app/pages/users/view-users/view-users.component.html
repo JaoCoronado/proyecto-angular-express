@@ -5,7 +5,11 @@
   <h4 class="text-center my-2 text-primary">Gestión de Usuarios</h4>
 
   <div class="d-flex">
-    <button class="btn btn-success btn-sm" (click)="addUser()">
+    <button
+      class="btn btn-success btn-sm"
+      (click)="addUser()"
+      [disabled]="userRole !== 'ROLE_ADMIN'"
+    >
       <i class="bi bi-person-plus"></i> Agregar Usuario
     </button>
   </div>

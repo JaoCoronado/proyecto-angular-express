@@ -5,7 +5,11 @@
   <h4 class="text-center my-2 text-primary">Gestión de Vehiculos</h4>
 
   <div class="d-flex">
-    <button class="btn btn-success btn-sm" (click)="addVehicle()">
+    <button
+      class="btn btn-success btn-sm"
+      (click)="addVehicle()"
+      [disabled]="userRole !== 'ROLE_ADMIN'"
+    >
       Agregar Vehiculo
     </button>
   </div>
@@ -116,12 +120,14 @@
         <button
           class="btn btn-outline-success btn-sm mx-1"
           (click)="editVehicle(element)"
+          [disabled]="userRole !== 'ROLE_ADMIN'"
         >
           Editar
         </button>
         <button
           class="btn btn-outline-danger btn-sm"
           (click)="deleteVehicle(element)"
+          [disabled]="userRole !== 'ROLE_ADMIN'"
         >
           <!-- <i class="bi bi-trash"></i>  -->
           Eliminar

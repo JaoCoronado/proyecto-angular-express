@@ -3,9 +3,11 @@ import { Injectable } from '@angular/core';
 import { IRespVehicle, IVehicle } from '../../core/interfaces/vehicle.interface';
 import { map, Observable } from 'rxjs';
 import { VehicleModel } from '../../core/models/vehicle.model';
+import { environment } from '../../../environments/environment.development';
 // import { UserModel } from '../../core/models/user.models';
 
-const urlApi: string = 'http://localhost:4000/api/v1';
+// const urlApi: string = 'http://localhost:4000/api/v1';
+const urlApi: string = environment.baseUrl;
 @Injectable({
   providedIn: 'root',
 })

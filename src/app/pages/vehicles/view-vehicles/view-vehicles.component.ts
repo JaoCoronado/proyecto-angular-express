@@ -50,6 +50,7 @@ export class ViewVehiclesComponent implements OnInit, AfterViewInit, OnDestroy {
   private vehicleService = inject(VehicleService);
   usersInfo: UserModel[] = [];
   userService = inject(UserService);
+  userRole: string | null;
 
   private router = inject(Router);
 
@@ -69,6 +70,7 @@ export class ViewVehiclesComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.userRole = localStorage.getItem('userRole');
     this.cargarUser();
     this.loadVehicle();
   }
@@ -137,19 +139,19 @@ export class ViewVehiclesComponent implements OnInit, AfterViewInit, OnDestroy {
         <tbody>
       <tr>
           <th scope="row" class="text-start text-primary fs-6">Marca</th>
-          <td class="fs-6"" class="fs-6">${element.make || '-'}</td>
+          <td class="fs-6">${element.make || '-'}</td>
         </tr>
         <tr>
           <th scope="row" class="text-start text-primary fs-6">Modelo</th>
-          <td class="fs-6"">${element.model || '-'}</td>
+          <td class="fs-6">${element.model || '-'}</td>
         </tr>
         <tr>
           <th scope="row" class="text-start text-primary fs-6">Año</th>
-          <td class="fs-6"">${element.year || '-'}</td>
+          <td class="fs-6">${element.year || '-'}</td>
         </tr>
         <tr>
           <th scope="row" class="text-start text-primary fs-6">Placa</th>
-          <td class="fs-6"">${element.licensePlate || '-'}</td>
+          <td class="fs-6">${element.licensePlate || '-'}</td>
         </tr>
         <tr>
           <th scope="row" class="text-start text-primary fs-6">Fecha de Creación</th>

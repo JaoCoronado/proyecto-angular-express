@@ -3,8 +3,10 @@ import { Injectable } from '@angular/core';
 import { IRespUser, IUser } from '../../core/interfaces/user.interface';
 import { map, Observable } from 'rxjs';
 import { UserModel } from '../../core/models/user.models';
+import { environment } from '../../../environments/environment.development';
 
-const urlApi: string = 'http://localhost:4000/api/v1';
+// const urlApi: string = 'http://localhost:4000/api/v1';
+const urlApi: string = environment.baseUrl;
 @Injectable({
   providedIn: 'root',
 })
